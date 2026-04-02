@@ -1,3 +1,4 @@
+import json
 import requests
 import streamlit as st
 import os
@@ -43,9 +44,26 @@ if prompt:
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             try:
-                res = requests.post(f"{BACKEND_URL}/chat", json={"message": prompt}, timeout=60)
+                res = requests.post(
+                    f"{BACKEND_URL}/chat",
+                    json={"message": prompt},
+                    stream=True,
+                    timeout=60,
+                )
                 res.raise_for_status()
-                response_text = res.json().get("text", "Error connecting to agent.")
+                response_text = ""
+                for line in res.iter_lines(decode_unicode=True):
+                    if not line or not line.startswith("data: "):
+                        continue
+                    payload = line.removeprefix("data: ").strip()
+                    if payload == "[DONE]":
+                        break
+                    try:
+                        response_text = json.loads(payload).get("text", response_text)
+                    except Exception:
+                        response_text = payload
+                if not response_text:
+                    response_text = "Error connecting to agent."
             except Exception as exc:
                 response_text = f"Backend request failed: {exc}"
             st.markdown(response_text)

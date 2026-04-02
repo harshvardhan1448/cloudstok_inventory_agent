@@ -48,11 +48,18 @@ USER (Streamlit UI) -> FastAPI backend -> LangChain agent -> SQL tools + Chroma 
 5. Start frontend from frontend/: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
 
 ## API
-- POST /chat with JSON: {"message": "...", "session_id": "default"}
+- POST /chat streams an SSE response for agent replies
+- GET /inventory, GET /inventory/{sku}, POST /inventory, PUT /inventory/{sku}, DELETE /inventory/{sku}
+- POST /inventory/{sku}/adjust for quantity changes with a reason
+- GET /reports and GET /reports/{report_type}
 - GET /health
 
 ## Fine-tuning
 See [finetuning/README_finetune.md](finetuning/README_finetune.md) for the updated dataset prep, training flags, and output files.
+
+## Submission Notes
+- The notebook in finetuning/ is kept separate as a reference artifact.
+- The Hugging Face token has been removed from the notebook; use a local or Colab secret named `HF_TOKEN` when running it.
 
 ## Deviations
 - /chat endpoint currently uses non-streaming invoke() response for simpler integration.

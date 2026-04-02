@@ -66,9 +66,120 @@ class SQLHandler:
             }
         return None
 
+    def list_products(self) -> list[dict]:
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        c.execute(
+            "SELECT id, sku, name, description, quantity, reorder_point, supplier_id, unit_price FROM products ORDER BY id"
+        )
+        rows = c.fetchall()
+        conn.close()
+        return [
+            {
+                "id": row[0],
+                "sku": row[1],
+                "name": row[2],
+                "description": row[3],
+                "quantity": row[4],
+                "reorder_point": row[5],
+                "supplier_id": row[6],
+                "unit_price": row[7],
+            }
+            for row in rows
+        ]
+
+    def get_product(self, sku: str) -> dict | None:
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        c.execute(
+            "SELECT id, sku, name, description, quantity, reorder_point, supplier_id, unit_price FROM products WHERE sku = ?",
+            (sku,),
+        )
+        row = c.fetchone()
+        conn.close()
+        if row is None:
+            return None
+        return {
+            "id": row[0],
+            "sku": row[1],
+            "name": row[2],
+            "description": row[3],
+            "quantity": row[4],
+            "reorder_point": row[5],
+            "supplier_id": row[6],
+            "unit_price": row[7],
+        }
+
+    def create_product(self, product: dict) -> dict:
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        c.execute(
+            """
+            INSERT INTO products (sku, name, description, quantity, reorder_point, supplier_id, unit_price)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                product["sku"],
+                product["name"],
+                product.get("description", ""),
+                int(product.get("quantity", 0)),
+                int(product.get("reorder_point", 0)),
+                int(product.get("supplier_id", 0)),
+                float(product.get("unit_price", 0.0)),
+            ),
+        )
+        conn.commit()
+        created = self.get_product(product["sku"])
+        conn.close()
+        if created is None:
+            raise ValueError(f"Failed to create product: {product['sku']}")
+        return created
+
+    def update_product(self, sku: str, updates: dict) -> dict | None:
+        current = self.get_product(sku)
+        if current is None:
+            return None
+
+        merged = {**current, **{key: value for key, value in updates.items() if value is not None}}
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        c.execute(
+            """
+            UPDATE products
+            SET name = ?, description = ?, quantity = ?, reorder_point = ?, supplier_id = ?, unit_price = ?
+            WHERE sku = ?
+            """,
+            (
+                merged["name"],
+                merged.get("description", ""),
+                int(merged.get("quantity", 0)),
+                int(merged.get("reorder_point", 0)),
+                int(merged.get("supplier_id", 0)),
+                float(merged.get("unit_price", 0.0)),
+                sku,
+            ),
+        )
+        conn.commit()
+        conn.close()
+        return self.get_product(sku)
+
+    def delete_product(self, sku: str) -> bool:
+        conn = sqlite3.connect(self.db_path)
+        c = conn.cursor()
+        c.execute("DELETE FROM products WHERE sku = ?", (sku,))
+        deleted = c.rowcount > 0
+        conn.commit()
+        conn.close()
+        return deleted
+
     def update_stock(self, sku: str, change: int, reason: str) -> int:
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
+        c.execute("SELECT quantity FROM products WHERE sku = ?", (sku,))
+        current_row = c.fetchone()
+        if current_row is None:
+            conn.close()
+            raise ValueError(f"SKU not found: {sku}")
         c.execute("UPDATE products SET quantity = quantity + ? WHERE sku = ?", (change, sku))
         c.execute(
             "INSERT INTO transactions (sku, change, reason, timestamp) VALUES (?, ?, ?, ?)",
@@ -78,8 +189,6 @@ class SQLHandler:
         row = c.fetchone()
         conn.commit()
         conn.close()
-        if row is None:
-            raise ValueError(f"SKU not found: {sku}")
         return int(row[0])
 
     def generate_report(self, report_type: str) -> str:
