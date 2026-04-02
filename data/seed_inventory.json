@@ -1,0 +1,47 @@
+[
+  {
+    "sku": "SKU-1001",
+    "name": "Power Supply 220V",
+    "description": "Industrial power supply",
+    "quantity": 45,
+    "reorder_point": 20,
+    "supplier_id": 1,
+    "unit_price": 89.99
+  },
+  {
+    "sku": "SKU-1002",
+    "name": "Industrial Motor 5HP",
+    "description": "Heavy duty motor",
+    "quantity": 8,
+    "reorder_point": 10,
+    "supplier_id": 2,
+    "unit_price": 450.0
+  },
+  {
+    "sku": "SKU-1003",
+    "name": "Heavy Duty Cable 50m",
+    "description": "Armored cable",
+    "quantity": 120,
+    "reorder_point": 30,
+    "supplier_id": 1,
+    "unit_price": 34.5
+  },
+  {
+    "sku": "SKU-1004",
+    "name": "Circuit Breaker 32A",
+    "description": "DIN rail breaker",
+    "quantity": 5,
+    "reorder_point": 15,
+    "supplier_id": 3,
+    "unit_price": 22.0
+  },
+  {
+    "sku": "SKU-1005",
+    "name": "Control Panel Box",
+    "description": "Weatherproof enclosure",
+    "quantity": 60,
+    "reorder_point": 25,
+    "supplier_id": 2,
+    "unit_price": 115.0
+  }
+]

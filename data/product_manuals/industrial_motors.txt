@@ -1,0 +1,7 @@
+Product: Industrial Motor 5HP (SKU-1002)
+Power Rating: 5 horsepower.
+Voltage Input: 220V to 240V AC.
+Compatible with: Belt-driven conveyor systems, pump assemblies, industrial fan units.
+Not compatible with: Single-phase 110V domestic circuits.
+Operating temp: 0C to 55C.
+Maintenance: Inspect bearings every 500 operating hours.

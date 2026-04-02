@@ -1,0 +1,5 @@
+Product: Power Supply 220V (SKU-1001)
+Voltage Input: 220V AC. Output: 24V DC, 10A.
+Compatible with: Industrial control panels, PLC systems.
+Not compatible with: 110V systems without transformer.
+Operating temp: -10C to 50C.

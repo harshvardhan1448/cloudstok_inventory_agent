@@ -1,0 +1,15 @@
+.env
+.venv/
+.venv311/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+data/inventory.db
+data/chroma_db/
+*.sqlite3
+*.log

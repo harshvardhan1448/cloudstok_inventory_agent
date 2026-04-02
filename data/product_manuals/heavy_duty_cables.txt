@@ -1,0 +1,7 @@
+Product: Heavy Duty Cable 50m (SKU-1003)
+Type: Armored industrial cable, 50 meter spool.
+Rated Voltage: Up to 600V.
+Compatible with: 220V and 380V industrial distribution setups.
+Not compatible with: Portable low-voltage signal-only wiring harnesses.
+Operating temp: -20C to 70C.
+Installation: Use certified cable glands for outdoor installations.
