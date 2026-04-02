@@ -7,6 +7,22 @@
 
 Cloudstok Inventory Agent is a natural-language inventory assistant for warehouse workflows. It combines a FastAPI backend, a Streamlit UI, SQLite inventory state, and Chroma-based semantic search over product manuals.
 
+## What This Project Does
+
+- Checks stock by product name or SKU.
+- Updates inventory with logged reasons for additions or removals.
+- Generates low-stock and full inventory reports.
+- Searches product manuals for compatibility and specification questions.
+- Exposes a FastAPI backend and a Streamlit chat UI for end-to-end interaction.
+
+## UI Screenshot
+
+Add your Streamlit screenshot here before submission:
+
+```text
+./screenshots/streamlit-ui.png
+```
+
 ## Architecture
 
 ```text
