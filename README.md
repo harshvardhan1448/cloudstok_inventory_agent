@@ -33,7 +33,7 @@ USER (Streamlit UI) -> FastAPI backend -> LangChain agent -> SQL tools + Chroma 
 - SQL DB: SQLite
 - API: FastAPI
 - UI: Streamlit
-- Fine-tuning: QLoRA script (PEFT + TRL)
+- Fine-tuning: CLI-based QLoRA script in finetuning/finetune_lora.py (PEFT + TRL)
 
 ## Setup
 1. Copy .env.example to .env and set GROQ_API_KEY.
@@ -52,7 +52,7 @@ USER (Streamlit UI) -> FastAPI backend -> LangChain agent -> SQL tools + Chroma 
 - GET /health
 
 ## Fine-tuning
-See finetuning/README_finetune.md for dataset prep and training notes.
+See [finetuning/README_finetune.md](finetuning/README_finetune.md) for the updated dataset prep, training flags, and output files.
 
 ## Deviations
 - /chat endpoint currently uses non-streaming invoke() response for simpler integration.

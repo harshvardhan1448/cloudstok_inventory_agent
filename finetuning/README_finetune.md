@@ -3,10 +3,12 @@
 This folder demonstrates a QLoRA fine-tuning pipeline for text-to-SQL tasks targeting the inventory schema.
 
 ## Files
-- finetune_lora.py: Training script using PEFT LoRA + TRL SFTTrainer
+- finetune_lora.py: CLI training script using PEFT LoRA + TRL SFTTrainer
 - prepare_dataset.py: Helper to generate sample JSONL format examples
-- dataset_sample.jsonl: Small sample dataset
-- training_logs.txt: Place training loss logs after Colab run
+- dataset_sample.jsonl: Sample training dataset for inventory text-to-SQL
+- requirements.txt: Dependencies for the finetuning environment
+- training_logs.txt: JSONL training history written by the script
+- cloudstok_finetune_lora.ipynb: Separate notebook version kept as a standalone reference
 
 ## Suggested Run Environment
 Use Google Colab T4 GPU.
@@ -38,11 +40,12 @@ python finetune_lora.py \
 
 4. Expected outputs:
 - `lora_output/` (saved adapter)
-- `training_logs.txt` (json lines with loss and step values)
+- `training_logs.txt` (JSONL with trainer state and loss values)
 
 ## Notes
 - Use an HF token with Llama access when loading Meta Llama models.
 - For quick smoke tests, you can swap to a smaller open model via `--model-name`.
+- The notebook in this folder is separate from the main training script and is not required to run finetuning.
 - This pipeline is for demonstration and assignment submission evidence.
 
 ## Note
