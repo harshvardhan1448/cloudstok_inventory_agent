@@ -20,7 +20,8 @@ Cloudstok Inventory Agent is a natural-language inventory assistant for warehous
 Add your Streamlit screenshot here before submission:
 
 ```text
-./screenshots/streamlit-ui.png
+<img width="1913" height="1023" alt="image" src="https://github.com/user-attachments/assets/1b755442-0e71-4e76-8ff1-1b0f477bb988" />
+
 ```
 
 ## Architecture
