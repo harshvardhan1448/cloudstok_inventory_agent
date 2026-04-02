@@ -1,6 +1,11 @@
 # Cloudstok Inventory Agent
 
-An autonomous AI agent for warehouse inventory management using natural language.
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688)
+![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-FF4B4B)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED)
+
+Cloudstok Inventory Agent is a natural-language inventory assistant for warehouse workflows. It combines a FastAPI backend, a Streamlit UI, SQLite inventory state, and Chroma-based semantic search over product manuals.
 
 ## Architecture
 
