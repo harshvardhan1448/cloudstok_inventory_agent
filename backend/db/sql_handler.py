@@ -2,10 +2,12 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
+from db.path_utils import find_data_path
+
 
 class SQLHandler:
     def __init__(self, db_path="data/inventory.db"):
-        default_db = Path(__file__).resolve().parents[2] / "data" / "inventory.db"
+        default_db = find_data_path("inventory.db")
         if db_path == "data/inventory.db":
             self.db_path = str(default_db)
         else:

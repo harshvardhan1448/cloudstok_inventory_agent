@@ -9,6 +9,8 @@ import chromadb
 from chromadb.config import Settings
 from langchain_core.documents import Document
 
+from db.path_utils import find_data_path
+
 os.environ.setdefault("ANONYMIZED_TELEMETRY", "false")
 logging.getLogger("chromadb").setLevel(logging.ERROR)
 logging.getLogger("chromadb.telemetry").setLevel(logging.CRITICAL)
@@ -52,9 +54,7 @@ class HashEmbeddingFunction:
         return vector
 
 CHROMA_HOST = os.getenv("CHROMA_HOST", "localhost")
-LOCAL_CHROMA_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "data", "chroma_db")
-)
+LOCAL_CHROMA_PATH = str(find_data_path("chroma_db"))
 
 class VectorHandler:
     def __init__(self):

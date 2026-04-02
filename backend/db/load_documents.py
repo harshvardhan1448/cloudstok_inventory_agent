@@ -3,6 +3,8 @@ from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 
+from db.path_utils import find_data_path
+
 try:
     from .vector_handler import VectorHandler
 except ImportError:
@@ -13,7 +15,7 @@ except ImportError:
 
 
 def ingest():
-    manuals_dir = Path(__file__).resolve().parents[2] / "data" / "product_manuals"
+    manuals_dir = find_data_path("product_manuals")
     loader = DirectoryLoader(str(manuals_dir), glob="*.txt", loader_cls=TextLoader)
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
