@@ -11,5 +11,39 @@ This folder demonstrates a QLoRA fine-tuning pipeline for text-to-SQL tasks targ
 ## Suggested Run Environment
 Use Google Colab T4 GPU.
 
+## Quick Pipeline
+
+1. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. (Optional) Regenerate the sample dataset:
+
+```bash
+python prepare_dataset.py
+```
+
+3. Run LoRA fine-tuning:
+
+```bash
+python finetune_lora.py \
+	--model-name meta-llama/Meta-Llama-3-8B-Instruct \
+	--dataset dataset_sample.jsonl \
+	--output-dir lora_output \
+	--logs-file training_logs.txt \
+	--use-4bit
+```
+
+4. Expected outputs:
+- `lora_output/` (saved adapter)
+- `training_logs.txt` (json lines with loss and step values)
+
+## Notes
+- Use an HF token with Llama access when loading Meta Llama models.
+- For quick smoke tests, you can swap to a smaller open model via `--model-name`.
+- This pipeline is for demonstration and assignment submission evidence.
+
 ## Note
 Full model training artifacts are not included in this repository due to hardware and storage constraints.

@@ -1,5 +1,15 @@
-{"instruction":"How many units of SKU-1001 are in stock?","input":"","output":"SELECT quantity FROM products WHERE sku = 'SKU-1001'"}
-{"instruction":"List all products below reorder point","input":"","output":"SELECT sku, name, quantity, reorder_point FROM products WHERE quantity <= reorder_point"}
-{"instruction":"Show transaction history for SKU-1004","input":"","output":"SELECT sku, change, reason, timestamp FROM transactions WHERE sku = 'SKU-1004' ORDER BY id DESC"}
-{"instruction":"Increase SKU-1004 by 50 units","input":"","output":"UPDATE products SET quantity = quantity + 50 WHERE sku = 'SKU-1004'"}
-{"instruction":"Get full inventory summary","input":"","output":"SELECT sku, name, quantity, unit_price FROM products"}
+{"instruction": "How many units of SKU-1001 are in stock?", "input": "", "output": "SELECT quantity FROM products WHERE sku = 'SKU-1001'"}
+{"instruction": "List all products below reorder point", "input": "", "output": "SELECT sku, name, quantity, reorder_point FROM products WHERE quantity <= reorder_point"}
+{"instruction": "Show transaction history for SKU-1004", "input": "", "output": "SELECT sku, change, reason, timestamp FROM transactions WHERE sku = 'SKU-1004' ORDER BY id DESC"}
+{"instruction": "What is the total quantity of all products in stock?", "input": "", "output": "SELECT SUM(quantity) AS total_quantity FROM products"}
+{"instruction": "Find the product with the highest quantity in stock", "input": "", "output": "SELECT sku, name, quantity FROM products ORDER BY quantity DESC LIMIT 1"}
+{"instruction": "How many transactions have been recorded for SKU-1002?", "input": "", "output": "SELECT COUNT(*) AS transaction_count FROM transactions WHERE sku = 'SKU-1002'"}
+{"instruction": "List all products that have been restocked in the last 7 days", "input": "", "output": "SELECT sku, name, quantity, timestamp FROM transactions WHERE reason = 'restock' AND timestamp >= DATE_SUB(NOW(), INTERVAL 7 DAY)"}
+{"instruction": "What is the average quantity of products in stock?", "input": "", "output": "SELECT AVG(quantity) AS average_quantity FROM products"}
+{"instruction": "Find all products that have never been sold", "input": "", "output": "SELECT p.sku, p.name FROM products p LEFT JOIN transactions t ON p.sku = t.sku AND t.reason = 'sale' WHERE t.id IS NULL"}
+{"instruction": "Show the total number of units sold for SKU-1003", "input": "", "output": "SELECT SUM(change) AS total_sold FROM transactions WHERE sku = 'SKU-1003' AND reason = 'sale'"}
+{"instruction": "List all products that are currently out of stock", "input": "", "output": "SELECT sku, name FROM products WHERE quantity = 0"}
+{"instruction": "Find the total number of restock transactions in the last month", "input": "", "output": "SELECT COUNT(*) AS restock_count FROM transactions WHERE reason = 'restock' AND timestamp >= DATE_SUB(NOW(), INTERVAL 1 MONTH)"}
+{"instruction": "What is the total value of all products in stock?", "input": "", "output": "SELECT SUM(quantity * price) AS total_value FROM products"}
+{"instruction": "List all products that have a quantity between 10 and 50", "input": "", "output": "SELECT sku, name, quantity FROM products WHERE quantity BETWEEN 10 AND 50"}
+{"instruction": "Show the most recent transaction for SKU-1005", "input": "", "output": "SELECT sku, change, reason, timestamp FROM transactions WHERE sku = 'SKU-1005' ORDER BY id DESC LIMIT 1"}
